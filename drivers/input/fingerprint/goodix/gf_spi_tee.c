@@ -876,9 +876,7 @@ static long gf_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 			break;
 		}
 
-		if (GF_KEY_HOME_DOUBLE_CLICK== gf_key.key) {
-			key_input = GF_KEY_INPUT_DOUBLE;
-		} else if (GF_KEY_POWER == gf_key.key) {
+		if (GF_KEY_POWER == gf_key.key) {
 			key_input = GF_KEY_INPUT_POWER;
 		} else if (GF_KEY_CAMERA == gf_key.key) {
 			key_input = GF_KEY_INPUT_CAMERA;
@@ -901,11 +899,6 @@ static long gf_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 			input_sync(gf_dev->input);
 			input_report_key(gf_dev->input, key_input, 0);
 			input_sync(gf_dev->input);
-		}
-
-		if (GF_KEY_HOME == gf_key.key) {
-		    input_report_key(gf_dev->input, key_input, gf_key.value);
-		    input_sync(gf_dev->input);
 		}
 
 		break;
@@ -2054,7 +2047,6 @@ static int gf_probe(struct platform_device  *pdev)
 	}
 
 	__set_bit(EV_KEY, gf_dev->input->evbit);
-	__set_bit(GF_KEY_INPUT_HOME, gf_dev->input->keybit);
 
 	__set_bit(GF_KEY_INPUT_DOUBLE, gf_dev->input->keybit);
 	__set_bit(GF_KEY_INPUT_MENU, gf_dev->input->keybit);
