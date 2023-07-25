@@ -48,13 +48,6 @@ u8 g_debug_level = DEBUG_LOG;
 #define GF_NAV_INPUT_LONG_PRESS		KEY_SEARCH
 #define GF_NAV_INPUT_HEAVY		KEY_CHAT
 
-#define GF_KEY_INPUT_MENU		KEY_MENU
-#define GF_KEY_INPUT_BACK		KEY_BACK
-#define GF_KEY_INPUT_POWER		KEY_POWER
-#define GF_KEY_INPUT_CAMERA		KEY_CAMERA
-#define GF_KEY_INPUT_KPENTER            KEY_KPENTER
-#define GF_KEY_INPUT_DOUBLE		BTN_C
-
 typedef enum gf_nav_event {
 	GF_NAV_NONE = 0,
 	GF_NAV_FINGER_UP,
@@ -77,11 +70,6 @@ typedef enum gf_key_event {
 	GF_KEY_CAMERA,
 	GF_KEY_HOME_DOUBLE_CLICK,
 } gf_key_event_t;
-
-struct gf_key {
-	enum gf_key_event key;
-	uint32_t value;   /* key down = 1, key up = 0 */
-};
 
 enum gf_netlink_cmd {
 	GF_NETLINK_TEST = 0,
@@ -151,8 +139,6 @@ typedef struct {
 
 #define GF_IOC_ENABLE_POWER		_IO(GF_IOC_MAGIC, 7)
 #define GF_IOC_DISABLE_POWER		_IO(GF_IOC_MAGIC, 8)
-
-#define GF_IOC_INPUT_KEY_EVENT		_IOW(GF_IOC_MAGIC, 9, struct gf_key)
 
 /* fp sensor has change to sleep mode while screen off */
 #define GF_IOC_ENTER_SLEEP_MODE		_IO(GF_IOC_MAGIC, 10)
