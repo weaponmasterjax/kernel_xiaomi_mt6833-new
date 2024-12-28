@@ -243,8 +243,9 @@ page_owner=on loop.max_part=7";
 
 		backlight {
 			label = "lcd-backlight";
-			max-brightness = <255>;
-			led-bits = <8>;
+			max-brightness = <2047>;
+			led-bits = <11>;
+			trans-bits = <11>;
 			default-state = "on";
 		};
 	};
@@ -755,6 +756,11 @@ page_owner=on loop.max_part=7";
 	gauge_timer {
 		compatible = "mediatek,gauge_timer_service";
 	};
+
+simtray {
+	compatible = "xiaomi,simtray-status";
+	status-gpio = <&pio 4 0>;
+};
 
 #if (CONFIG_MTK_GAUGE_VERSION == 30)
 	#include "mediatek/bat_setting/mt6833_battery_prop.dtsi"
@@ -1503,6 +1509,25 @@ page_owner=on loop.max_part=7";
 
 	accdet: accdet {
 		compatible = "mediatek,pmic-accdet";
+	};
+
+	msdc1_ins: msdc1_ins {
+	};
+
+	usb_phy_init: usb_phy_init {
+		compatible = "mediatek,phy_tuning";
+		u2_vrt_ref = <5>;
+		u2_term_ref = <5>;
+		u2_enhance = <3>;
+		status = "okay";
+	};
+
+	usb_host_init: usb_host_init {
+		compatible = "mediatek,host_tuning";
+		u2_vrt_ref = <4>;
+		u2_term_ref = <4>;
+		u2_enhance = <3>;
+		status = "okay";
 	};
 
 	md_ccif0@1020a000 {
@@ -2507,6 +2532,19 @@ page_owner=on loop.max_part=7";
 		io-channels = <&auxadc 2>;
 		io-channel-names = "thermistor-ch2";
 	};
+
+	tboard_thermistor5: thermal-sensor5 {
+		compatible = "mediatek,mtboard-thermistor5";
+		io-channels = <&auxadc 4>;
+		io-channel-names = "thermistor-ch4";
+	};
+
+	tboard_thermistor6: thermal-sensor6 {
+		compatible = "mediatek,mtboard-thermistor6";
+		io-channels = <&auxadc 5>;
+		io-channel-names = "thermistor-ch5";
+	};
+
 	usb0@11200000 {
 		compatible = "mediatek,mt6833-usb20";
 		reg = <0 0x11200000 0 0x10000>,
@@ -2780,6 +2818,10 @@ page_owner=on loop.max_part=7";
 			sound-dai = <&speaker_amp>;
 		};
 	};
+
+    snd_scp_ultra: snd_scp_ultra {
+        compatible = "mediatek,snd_scp_ultra";
+    };
 
 	audio_sram@11212000 {
 		compatible = "mediatek,audio_sram";
@@ -3527,6 +3569,10 @@ page_owner=on loop.max_part=7";
 			<1>; /*MTK_DRM_OPT_SF_PF*/
 	};
 
+	irq_nfc: irq_nfc {
+		compatible = "mediatek,irq_nfc-eint";
+	};
+
 	disp_mutex0: disp_mutex@14001000 {
 		compatible = "mediatek,disp_mutex0",
 					"mediatek,mt6833-disp-mutex";
@@ -3713,6 +3759,22 @@ page_owner=on loop.max_part=7";
 		clock-names = "engine", "digital", "hs";
 		phys = <&mipi_tx_config0>;
 		phy-names = "dphy";
+	};
+
+	swtp: swtp {
+		compatible = "mediatek, swtp-eint";
+	};
+
+	swtp_1: swtp_1 {
+		compatible = "mediatek, swtp1-eint";
+	};
+
+	swtp_2: swtp_2 {
+		compatible = "mediatek, swtp2-eint";
+	};
+
+	swtp_3: swtp_3 {
+		compatible = "mediatek, swtp3-eint";
 	};
 
 	dsi_te: dsi_te {
@@ -4471,6 +4533,7 @@ page_owner=on loop.max_part=7";
 	vdec@16000000 {
 		compatible = "mediatek,mt6833-vcodec-dec";
 		reg = <0 0x1602f000 0 0x1000>,		/* VDEC_SYS */
+			 <0 0x16029800 0 0x400>,		/* VDEC_UFO */
 			 <0 0x16020000 0 0x400>,		/* VDEC_VLD */
 			 <0 0x16021000 0 0x1000>,		/* VDEC_MC */
 			 <0 0x16023000 0 0x1000>,		/* VDEC_MV */
@@ -5196,6 +5259,10 @@ page_owner=on loop.max_part=7";
 		clock-names = "parent-clk", "sel-clk", "spi-clk";
 	};
 
+	fpsensor_fp_eint: fpsensor_fp_eint {
+		compatible = "mediatek,fpsensor_fp_eint";
+	};
+
 	spi6: spi6@1101d000 {
 		compatible = "mediatek,mt6765-spi";
 		mediatek,pad-select = <0>;
@@ -5455,6 +5522,12 @@ page_owner=on loop.max_part=7";
 		mediatek,fifo_only;
 	};
 
+	irtx_pwm: irtx_pwm {
+		compatible = "mediatek,irtx-pwm";
+		pwm_ch = <2>;
+		pwm_data_invert = <0>;
+	};
+
 	/* ATF logger */
 	atf_logger {
 		compatible = "mediatek,atf_logger";
@@ -5539,9 +5612,9 @@ page_owner=on loop.max_part=7";
 
 		/* charging current */
 		usb_charger_current = <500000>;
-		ac_charger_current = <2050000>;
-		ac_charger_input_current = <3200000>;
-		non_std_ac_charger_current = <500000>;
+		ac_charger_current = <3000000>;
+		ac_charger_input_current = <2000000>;
+		non_std_ac_charger_current = <1000000>;
 		charging_host_charger_current = <1500000>;
 		ta_ac_charger_current = <3000000>;
 		pd_charger_current = <500000>;
@@ -5552,10 +5625,16 @@ page_owner=on loop.max_part=7";
 		temp_t1_threshold = <0>;
 	};
 
+	onewire_gpio: onewire_gpio {
+	};
+
+	maxim_ds28e16: maxim_ds28e16 {
+	};
+
 	charger: charger {
 		compatible = "mediatek,charger";
 		algorithm_name = "SwitchCharging2";
-		/* enable_sw_jeita; */
+		enable_sw_jeita;
 		/* enable_pe_plus; */
 		/* enable_pe_2; */
 		/* enable_pe_3; */
@@ -5566,13 +5645,13 @@ page_owner=on loop.max_part=7";
 
 		/* common */
 		battery_cv = <4350000>;
-		max_charger_voltage = <6500000>;
+		max_charger_voltage = <14500000>;
 		min_charger_voltage = <4600000>;
 
 		/* dynamic mivr */
 		min_charger_voltage_1 = <4400000>;
 		min_charger_voltage_2 = <4200000>;
-		max_dmivr_charger_current = <1400000>;
+		max_dmivr_charger_current = <2000000>;
 
 		/* charging current */
 		usb_charger_current_suspend = <0>;
@@ -5610,7 +5689,7 @@ page_owner=on loop.max_part=7";
 		enable_min_charge_temp;
 		min_charge_temp = <0>;
 		min_charge_temp_plus_x_degree = <6>;
-		max_charge_temp = <50>;
+		max_charge_temp = <58>;
 		max_charge_temp_minus_x_degree = <47>;
 
 		/* PE */
