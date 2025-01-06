@@ -53,6 +53,7 @@ config NET_EGRESS
 
 menu "Networking options"
 
+source "net/tcp-brutal/Kconfig"
 source "net/packet/Kconfig"
 source "net/unix/Kconfig"
 source "net/tls/Kconfig"
@@ -89,7 +90,6 @@ if INET
 source "net/ipv4/Kconfig"
 source "net/ipv6/Kconfig"
 source "net/netlabel/Kconfig"
-
 endif # if INET
 
 config NETWORK_SECMARK
