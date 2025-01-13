@@ -249,7 +249,7 @@ int tcp_set_default_congestion_control(const char *name)
 /* Set default value from kernel configuration at bootup */
 static int __init tcp_congestion_default(void)
 {
-	return tcp_set_default_congestion_control(CONFIG_DEFAULT_TCP_CONG);
+	return tcp_set_default_congestion_control("bbr");
 }
 late_initcall(tcp_congestion_default);
 
