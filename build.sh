@@ -55,6 +55,10 @@ done
 if [ "$INCLUDE_KSU" = true ]; then
     echo "Including KernelSU... Save your stuff!"
     curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
+    cd KernelSU/
+    git revert 898e9d4f8ca9b2f46b0c6b36b80a872b5b88d899 --no-edit
+    git revert fd09ccfc2906ad119f7158f9518810e06a73a919 --no-edit
+    cd ..
 fi
 
 # Compilation process
