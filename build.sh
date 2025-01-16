@@ -22,7 +22,7 @@ CURRENT_DIR=$(pwd)
 # Device Configs
 DEVICE="everpal"
 DEFCONFIG="${DEVICE}_defconfig"
-ZIPNAME="AdrenalinKernel-${DEVICE}-${DATE}.zip"
+ZIPNAME="AdrenalinKernel-V2-${DEVICE}-${DATE}.zip"
 
 # Ensure the toolchain is available
 if [ ! -d "$TC_DIR" ]; then
