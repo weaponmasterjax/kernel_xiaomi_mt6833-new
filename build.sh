@@ -22,7 +22,7 @@ CURRENT_DIR=$(pwd)
 # Device Configs
 DEVICE="everpal"
 DEFCONFIG="${DEVICE}_defconfig"
-ZIPNAME="AdrenalinKernel-V2-${DEVICE}-${DATE}.zip"
+ZIPNAME="PROEDITIONKernel-V2-${DEVICE}-${DATE}.zip"
 
 # Ensure the toolchain is available
 if [ ! -d "$TC_DIR" ]; then
@@ -43,7 +43,7 @@ for arg in "$@"; do
         -c) CLEAN_BUILD=true ;;
         -ksu) 
             INCLUDE_KSU=true
-            ZIPNAME="AdrenalinKernel-V2-KSU-${DEVICE}-${DATE}.zip"
+            ZIPNAME="PROEDITIONKernel-V2-KSU-${DEVICE}-${DATE}.zip"
             ;;
     esac
 done
@@ -66,7 +66,7 @@ if make -j12 O=out ARCH=arm64 CC="ccache clang" LLVM=1 LLVM_IAS=1 CROSS_COMPILE=
     echo -e "\nKernel compiled successfully! Zipping up...\n"
 
     # Clone AnyKernel3 and create zip
-    git clone -q --depth=1 https://github.com/weaponmasterjax/AnyKernel3 AnyKernel3
+    git clone -q -b pro --depth=1 https://github.com/weaponmasterjax/AnyKernel3 AnyKernel3
     cp out/arch/arm64/boot/Image.gz AnyKernel3
     (cd AnyKernel3 && zip -r9 "../$ZIPNAME" * -x '*.git*' README.md *placeholder)
     rm -rf AnyKernel3 out/arch/arm64/boot
