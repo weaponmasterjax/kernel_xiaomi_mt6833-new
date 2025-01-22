@@ -90,12 +90,13 @@ scm_version()
 		# it fails. Note that git-diff-index does not refresh the
 		# index, so it may give misleading results. See
 		# git-update-index(1), git-diff-index(1), and git-status(1).
-		if {
-			git --no-optional-locks status -uno --porcelain 2>/dev/null ||
-			git diff-index --name-only HEAD
-		} | grep -qvE '^(.. )?scripts/package'; then
-			printf '%s' -dirty
-		fi
+		#if {
+		#	git --no-optional-locks status -uno --porcelain 2>/dev/null ||
+		#	git diff-index --name-only HEAD
+		#} | grep -qvE '^(.. )?scripts/package'; then
+		#	printf '%s' -dirty
+		#fi
+		# Shut up dude
 
 		# All done with git
 		return
@@ -117,9 +118,10 @@ scm_version()
 
 		# Are there uncommitted changes?
 		# These are represented by + after the changeset id.
-		case "$hgid" in
-			*+|*+\ *) printf '%s' -dirty ;;
-		esac
+		#case "$hgid" in
+		#	*+|*+\ *) printf '%s' -dirty ;;
+		#esac
+		# Shut up dude
 
 		# All done with mercurial
 		return
@@ -191,3 +193,4 @@ else
 fi
 
 echo "$res"
+# We will come back later if any retarded app forces us to spoof this.
