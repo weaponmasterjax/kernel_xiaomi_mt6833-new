@@ -55,14 +55,13 @@ done
 if [ "$INCLUDE_KSU" = true ]; then
     echo "Including KernelSU... Save your stuff!"
     curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -
-    git clone https://github.com/devnoname120/susfs4ksu-toco -b kernel-4.14 temp-patch
+    git clone https://github.com/cvnertnc/susfs4ksu-begonia -b kernel-4.14 temp-patch
     cd temp-patch
-    cp ./kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ../KernelSU-Next/
-    cp ./kernel_patches/50_add_susfs_in_kernel-4.14.patch ../
+    cp ./kernel_patches/0001-KernelSU-Next-Implement-susfs-v1.5.3-plus-non-gki.patch ../KernelSU-Next/
     cp ./kernel_patches/fs/* ../fs/
-    cp ./kernel_patches/include/linux/* ../include/linux/
+    #cp ./kernel_patches/include/linux/* ../include/linux/
     cd ../KernelSU-Next
-    patch -p1 < 10_enable_susfs_for_ksu.patch
+    patch -p1 < 0001-KernelSU-Next-Implement-susfs-v1.5.3-plus-non-gki.patch
     cd ..
     rm -rf temp-patch
 fi
