@@ -55,19 +55,6 @@ done
 if [ "$INCLUDE_KSU" = true ]; then
     echo "Including KernelSU... Save your stuff!"
     curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -
-    # SUSFS begin
-    mkdir temppatch
-    cd temppatch
-    git clone https://gitlab.com/simonpunk/susfs4ksu -b kernel-4.14 .
-    cp ./kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ../KernelSU-Next/
-    cp ./kernel_patches/50_add_susfs_in_kernel-4.14.patch ../
-    cp ./kernel_patches/fs/* ../fs/
-    cp ./kernel_patches/include/linux/* ../include/linux/
-    cd ../KernelSU-Next
-    patch -p1 < 10_enable_susfs_for_ksu.patch
-    cd ..
-    patch -p1 < 50_add_susfs_in_kernel-4.14.patch
-    cd ..
 fi
 
 # Compilation process
