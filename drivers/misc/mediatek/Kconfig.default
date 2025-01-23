@@ -248,7 +248,6 @@ config ANDROID_DEFAULT_SETTING
 	select TASKSTATS
 	select TASK_XACCT
 	select TCP_CONG_ADVANCED
-	select TCP_CONG_BIC
 	select TIMERFD
 	select TTY
 	select TUN
