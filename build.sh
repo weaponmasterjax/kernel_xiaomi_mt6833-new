@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Compile script for Hydrogen kernel
+# Compile script for Hydrogen kernel modded to Adrenalin
 # Optimized by ChatGPT
 
 # Prebuild hacks
@@ -22,7 +22,7 @@ CURRENT_DIR=$(pwd)
 # Device Configs
 DEVICE="everpal"
 DEFCONFIG="${DEVICE}_defconfig"
-ZIPNAME="AdrenalinKernel-V2.6-${DEVICE}-${DATE}.zip"
+ZIPNAME="AdrenalinKernel-V2.7-${DEVICE}-${DATE}.zip"
 
 # Ensure the toolchain is available
 if [ ! -d "$TC_DIR" ]; then
@@ -43,7 +43,7 @@ for arg in "$@"; do
         -c) CLEAN_BUILD=true ;;
         -ksu) 
             INCLUDE_KSU=true
-            ZIPNAME="AdrenalinKernel-V2.6-KSU-${DEVICE}-${DATE}.zip"
+            ZIPNAME="AdrenalinKernel-V2.7-KSU-${DEVICE}-${DATE}.zip"
             ;;
     esac
 done
