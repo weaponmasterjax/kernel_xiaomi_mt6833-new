@@ -1665,6 +1665,9 @@ static struct dentry *lookup_real(struct inode *dir, struct dentry *dentry,
 				  unsigned int flags)
 {
 	struct dentry *old;
+#ifdef CONFIG_KSU_SUSFS_SUS_PATH
+	int error;
+#endif
 
 	/* Don't create child dentry for a dead directory. */
 	if (unlikely(IS_DEADDIR(dir))) {
