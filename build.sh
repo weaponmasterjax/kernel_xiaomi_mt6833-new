@@ -43,7 +43,7 @@ for arg in "$@"; do
         -c) CLEAN_BUILD=true ;;
         -ksu) 
             INCLUDE_KSU=true
-            ZIPNAME="AdrenalinKernel-V2.7-KSU-${DEVICE}-${DATE}.zip"
+            ZIPNAME="AdrenalinKernel-V2.9-KSU-${DEVICE}-${DATE}.zip"
             ;;
     esac
 done
