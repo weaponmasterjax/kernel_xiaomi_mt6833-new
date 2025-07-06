@@ -22,7 +22,7 @@ CURRENT_DIR=$(pwd)
 # Device Configs
 DEVICE="everpal"
 DEFCONFIG="${DEVICE}_defconfig"
-ZIPNAME="AdrenalinKernel-${DEVICE}-${DATE}.zip"
+ZIPNAME="PROEDITIONKernel-${DEVICE}-${DATE}.zip"
 
 # Ensure the toolchain is available
 if [ ! -d "$TC_DIR" ]; then
@@ -43,7 +43,7 @@ for arg in "$@"; do
         -c) CLEAN_BUILD=true ;;
         -ksu) 
             INCLUDE_KSU=true
-            ZIPNAME="AdrenalinKernel-KSU-${DEVICE}-${DATE}.zip"
+            ZIPNAME="PROEDITIONKernel-KSU-${DEVICE}-${DATE}.zip"
             ;;
     esac
 done
