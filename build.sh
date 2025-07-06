@@ -53,8 +53,8 @@ done
 
 # Include KernelSU if specified
 if [ "$INCLUDE_KSU" = true ]; then
-    echo "Including KernelSU... Save your stuff!"
-    curl -LSs "https://raw.githubusercontent.com/tiann/KernelSU/main/kernel/setup.sh" | bash -
+    echo "Including KernelSU Next... Save your stuff!"
+    curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -s next
 fi
 
 # Compilation process
