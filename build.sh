@@ -68,7 +68,7 @@ if make -j12 O=out ARCH=arm64 CC="ccache clang" LLVM=1 LLVM_IAS=1 CROSS_COMPILE=
     # Clone AnyKernel3 and create zip
     git clone -q --depth=1 https://github.com/weaponmasterjax/AnyKernel3 AnyKernel3
     cp out/arch/arm64/boot/Image.gz AnyKernel3
-    (cd AnyKernel3 && zip -r9 "../$ZIPNAME" * -x '*.git*' README.md *placeholder)
+    (cd AnyKernel3 && zip -r9 "../$ZIPNAME" * -x '*.git*' README.md '*placeholder')
     rm -rf AnyKernel3 out/arch/arm64/boot
 
     # Clean up KernelSU changes if applied
