@@ -127,4 +127,12 @@ all.config
 kernel/configs/android-*.cfg
 
 out/
+
+#KSU stuffs
 KernelSU-Next/
+
+kernel_patches
+
+susfs4ksu
+
+drivers/kernelsu
