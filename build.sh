@@ -63,6 +63,7 @@ if [ "$INCLUDE_KSU" = true ]; then
         echo "Patching file: $file.c with fix_$file.c.patch"
         patch -p1 --forward < "../kernel_patches/next/susfs_fix_patches/v1.5.9/fix_$file.c.patch"
     done
+    sed -i '/susfs_set_kernel_sid();/d' kernel/selinux/rules.c
     cd ..
 fi
 
