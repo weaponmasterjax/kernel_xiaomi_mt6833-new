@@ -54,7 +54,16 @@ done
 # Include KernelSU if specified
 if [ "$INCLUDE_KSU" = true ]; then
     echo "Including KernelSU Next... Save your stuff!"
-    curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -s next
+    curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -s v1.0.9
+    git clone https://github.com/WildKernels/kernel_patches.git kernel_patches
+    cd KernelSU-Next
+    wget -q https://github.com/devnoname120/susfs4ksu-toco/raw/refs/heads/kernel-4.14-backport/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch
+    patch -p1 --forward < 10_enable_susfs_for_ksu.patch
+    for file in $(find ./kernel -maxdepth 2 -name "*.rej" -printf "%f\n" | cut -d'.' -f1); do
+        echo "Patching file: $file.c with fix_$file.c.patch"
+        patch -p1 --forward < "../kernel_patches/next/susfs_fix_patches/v1.5.9/fix_$file.c.patch"
+    done
+    cd ..
 fi
 
 # Compilation process
