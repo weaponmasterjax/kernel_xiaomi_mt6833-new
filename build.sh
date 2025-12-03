@@ -22,27 +22,7 @@ CURRENT_DIR=$(pwd)
 # Device Configs
 DEVICE="everpal"
 DEFCONFIG="${DEVICE}_defconfig"
-# Read kernel localversion from defconfig (if present) and sanitize for filename
-LOCALVER=""
-if [ -f "arch/arm64/configs/${DEFCONFIG}" ]; then
-    # Extract the value of CONFIG_LOCALVERSION if set (may contain quotes)
-    LOCALVER_RAW=$(grep -E '^CONFIG_LOCALVERSION=' arch/arm64/configs/${DEFCONFIG} || true)
-    if [ -n "$LOCALVER_RAW" ]; then
-        # Remove prefix and strip surrounding quotes (single or double)
-        LOCALVER=${LOCALVER_RAW#CONFIG_LOCALVERSION=}
-        # Strip surrounding single quotes (in case)
-        LOCALVER=${LOCALVER#\'}
-        LOCALVER=${LOCALVER%\'}
-    fi
-fi
-
-# Sanitize localversion to be filename-safe: replace non-alnum with _ and trim leading non-alnum
-if [ -n "$LOCALVER" ]; then
-    LOCALVER_SAFE=$(echo "$LOCALVER" | sed 's/[^A-Za-z0-9._-]/_/g' | sed 's/^[^A-Za-z0-9]*//')
-    ZIPNAME="AdrenalinKernel-${DEVICE}${LOCALVER_SAFE:+-${LOCALVER_SAFE}}-${DATE}.zip"
-else
-    ZIPNAME="AdrenalinKernel-${DEVICE}-${DATE}.zip"
-fi
+ZIPNAME="AdrenalinKernel-${DEVICE}-${DATE}.zip"
 
 # Ensure the toolchain is available
 if [ ! -d "$TC_DIR" ]; then
