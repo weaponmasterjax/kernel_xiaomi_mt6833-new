@@ -130,3 +130,5 @@ kernel_patches
 KernelSU-Next
 
 susfs4ksu-toco
+
+/out
